@@ -10,6 +10,7 @@ public class TicketManagerTest {
 
     TicketRepository repo = new TicketRepository();
     TicketManager manager = new TicketManager(repo);
+    TicketByTimeOnBoardComporator comparator = new TicketByTimeOnBoardComporator();
 
     Ticket card1 = new Ticket (1, 10_000, "AER", "VKO", 230);
     Ticket card2 = new Ticket (2, 6_000, "VKO", "LED", 110);
@@ -28,28 +29,28 @@ public class TicketManagerTest {
     }
 
     @Test
-    public void shouldSearchByAirportsIfFewMatches() {
+    public void shouldFindByAirportsIfFewMatches() {
 
-        Ticket[] expected = {card1, card5, card4};
-        Ticket[] actual = manager.searchBy("AER", "VKO");
+        Ticket[] expected = {card1, card4, card5};
+        Ticket[] actual = manager.findAll("AER", "VKO", comparator);
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldSearchByAirportsIfOneMatch() {
+    public void shouldFindByAirportsIfOneMatch() {
 
         Ticket[] expected = {card3};
-        Ticket[] actual = manager.searchBy("LED", "AER");
+        Ticket[] actual = manager.findAll("LED", "AER", comparator);
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldSearchByAirportsIfNoMatch() {
+    public void shouldFindByAirportsIfNoMatch() {
 
         Ticket[] expected = {};
-        Ticket[] actual = manager.searchBy("LED", "VKO");
+        Ticket[] actual = manager.findAll("LED", "VKO", comparator);
 
         Assertions.assertArrayEquals(expected, actual);
     }
