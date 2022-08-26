@@ -16,7 +16,7 @@ public class TicketManager {
         repository.save(card);
     }
 
-    public Ticket[] searchBy(String from, String to) {
+    public Ticket[] findAll(String from, String to) {
         Ticket[] result = new Ticket[0];
         for (Ticket card: repository.findAll()) {
             if (matches(card, from, to)) {
@@ -38,11 +38,6 @@ public class TicketManager {
         } else {
             return false;
         }
-    }
-
-    public Ticket[] findAll(String from, String to) {
-        return repository.findAll();
-
     }
 
     public void removeById(int id) {

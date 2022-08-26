@@ -31,7 +31,7 @@ public class TicketManagerTest {
     public void shouldSearchByAirportsIfFewMatches() {
 
         Ticket[] expected = {card1, card5, card4};
-        Ticket[] actual = manager.searchBy("AER", "VKO");
+        Ticket[] actual = manager.findAll("AER", "VKO");
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -40,7 +40,7 @@ public class TicketManagerTest {
     public void shouldSearchByAirportsIfOneMatch() {
 
         Ticket[] expected = {card3};
-        Ticket[] actual = manager.searchBy("LED", "AER");
+        Ticket[] actual = manager.findAll("LED", "AER");
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -49,7 +49,7 @@ public class TicketManagerTest {
     public void shouldSearchByAirportsIfNoMatch() {
 
         Ticket[] expected = {};
-        Ticket[] actual = manager.searchBy("LED", "VKO");
+        Ticket[] actual = manager.findAll("LED", "VKO");
 
         Assertions.assertArrayEquals(expected, actual);
     }
